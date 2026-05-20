@@ -1,65 +1,377 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
+import { MapPin, Send, Heart, ChevronDown, Clock, Music } from "lucide-react";
 
 export default function Home() {
+  const [message, setMessage] = useState("");
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+    
+    const text = encodeURIComponent(`Dearest Ishake & Marleen,\n\n${message}`);
+    const whatsappUrl = `https://wa.me/201151234958?text=${text}`;
+    
+    window.open(whatsappUrl, "_blank");
+    setMessage("");
+  };
+
+  const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative min-h-screen overflow-x-hidden bg-cream-500 selection:bg-cherry-300 selection:text-cherry-900">
+      
+      {/* 1. Immersive Hero Section */}
+      <section className="relative h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/hero.png" 
+            alt="Wedding Background" 
+            fill 
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          {/* Elegant Gradient Overlays for Readability */}
+          <div className="absolute inset-0 bg-cherry-900/40 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-cherry-900 via-transparent to-transparent opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent opacity-60"></div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 mt-10 w-full">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="font-[family-name:var(--font-cormorant)] italic text-cherry-100 text-xl md:text-3xl tracking-widest mb-6 drop-shadow-md"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            We are getting married
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            className="flex flex-col items-center"
           >
-            Documentation
-          </a>
+            <h1 className="font-[family-name:var(--font-playfair)] font-bold text-6xl md:text-8xl lg:text-[10rem] text-cream-100 leading-none drop-shadow-2xl">
+              Ishake
+            </h1>
+            <span className="font-[family-name:var(--font-dancing)] text-5xl md:text-7xl text-cherry-300 -my-4 md:-my-8 z-10 heartbeat drop-shadow-lg">
+              &
+            </span>
+            <h1 className="font-[family-name:var(--font-playfair)] font-bold text-6xl md:text-8xl lg:text-[10rem] text-cream-100 leading-none drop-shadow-2xl">
+              Marleen
+            </h1>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="mt-12 flex items-center gap-4 text-cherry-200"
+          >
+            <div className="h-px w-16 bg-cherry-300 drop-shadow-md"></div>
+            <p className="font-[family-name:var(--font-playfair)] text-xl tracking-[0.2em] uppercase drop-shadow-md">
+              [Date Placeholder]
+            </p>
+            <div className="h-px w-16 bg-cherry-300 drop-shadow-md"></div>
+          </motion.div>
         </div>
-      </main>
-    </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 text-cherry-200 float-animation drop-shadow-md"
+        >
+          <span className="font-[family-name:var(--font-cormorant)] italic text-lg">Scroll Down</span>
+          <ChevronDown size={28} className="animate-bounce" />
+        </motion.div>
+      </section>
+
+      {/* 2. Letter to Guests */}
+      <section className="py-28 px-6 bg-cream-500 relative">
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cherry-900 to-transparent opacity-10"></div>
+        
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16 relative z-10">
+          {/* Letter Text Column */}
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="w-full lg:w-1/2 text-center lg:text-left"
+          >
+            <p className="font-[family-name:var(--font-dancing)] text-4xl md:text-5xl text-cherry-700 mb-6 text-center lg:text-left">A Letter to Our Guests</p>
+            <div className="card-glass bg-white/80 p-8 md:p-12 rounded-sm shadow-sm border border-cherry-100 relative">
+              {/* Corner Ornaments */}
+              <Heart size={12} className="absolute top-3 left-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute top-3 right-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute bottom-3 left-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute bottom-3 right-3 text-cherry-300 fill-cherry-300/10" />
+
+              <div className="absolute top-4 left-4 text-4xl text-cherry-200 font-serif opacity-30">"</div>
+              <div className="absolute bottom-4 right-4 text-4xl text-cherry-200 font-serif rotate-180 opacity-30">"</div>
+              <p className="font-[family-name:var(--font-cormorant)] text-xl leading-loose text-cherry-900 text-justify">
+                Dearest friends and family,<br/><br/>
+                It is with overflowing joy and profound gratitude that we invite you to share in the most special day of our lives. 
+                Our journey together has been shaped by love, guided by faith, and surrounded by your endless support. 
+                We cannot wait to celebrate the beginning of our forever with the people who mean the world to us.
+              </p>
+              <div className="mt-8 flex justify-center lg:justify-start">
+                <span className="font-[family-name:var(--font-dancing)] text-3xl text-cherry-800">With all our love, I & M</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* profile1 Image Column */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="w-full lg:w-1/2"
+          >
+            <div className="relative w-full max-w-sm mx-auto aspect-[3/4]">
+              {/* Elegant Arched Frame */}
+              <div className="absolute inset-0 rounded-t-[180px] rounded-b-2xl overflow-hidden shadow-2xl border-[8px] border-white z-10">
+                <Image 
+                  src="/profile1.jpeg" 
+                  alt="Ishake and Marleen" 
+                  fill 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              {/* Decorative Frame */}
+              <div className="absolute -inset-4 rounded-t-[195px] rounded-b-3xl border border-cherry-300 z-0"></div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3. The Promise Section */}
+      <section className="py-24 px-6 bg-cherry-50">
+        <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-16">
+          {/* profile2 Image Column */}
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="w-full lg:w-1/2"
+          >
+            <div className="relative w-full max-w-sm mx-auto aspect-[3/4]">
+              {/* Elegant Arched Frame */}
+              <div className="absolute inset-0 rounded-t-[180px] rounded-b-2xl overflow-hidden shadow-2xl border-[8px] border-white z-10">
+                <Image 
+                  src="/profile2.jpeg" 
+                  alt="Ishake and Marleen together" 
+                  fill 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              {/* Decorative Frame */}
+              <div className="absolute -inset-4 rounded-t-[195px] rounded-b-3xl border border-cherry-300 z-0"></div>
+            </div>
+          </motion.div>
+          
+          {/* Quote Column */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="w-full lg:w-1/2 text-center lg:text-left"
+          >
+            <h2 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-cherry-900 mb-6 font-bold">Our Promise</h2>
+            <div className="relative p-6 bg-white/40 backdrop-blur-sm rounded-2xl border border-cherry-100/50 mb-8 inline-block w-full">
+              {/* Corner Ornaments on the Quote container */}
+              <Heart size={10} className="absolute top-2 left-2 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={10} className="absolute top-2 right-2 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={10} className="absolute bottom-2 left-2 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={10} className="absolute bottom-2 right-2 text-cherry-300 fill-cherry-300/10" />
+              
+              <p className="font-[family-name:var(--font-cormorant)] text-2xl italic text-cherry-800 leading-relaxed">
+                "And over all these virtues put on love, which binds them all together in perfect unity."
+              </p>
+              <p className="text-lg text-cherry-500 font-medium mt-2">— Colossians 3:14</p>
+            </div>
+            <p className="font-[family-name:var(--font-cormorant)] text-xl text-cherry-800 leading-loose">
+              Every day spent together has been a blessing, a beautifully unfolding story written by God's own hand. 
+              We are incredibly blessed to have found in each other a lifelong partner, a best friend, and a home.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 4. Vertical Timeline */}
+      <section className="py-28 px-4 bg-cream-500 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cherry-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div className="max-w-3xl mx-auto relative z-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <p className="font-[family-name:var(--font-dancing)] text-4xl text-cherry-600 mb-2">The Itinerary</p>
+            <h2 className="font-[family-name:var(--font-playfair)] text-5xl text-cherry-900">Flow of the Day</h2>
+          </motion.div>
+
+          <div className="relative border-l-2 border-cherry-300 ml-4 md:ml-1/2 md:left-1/2 md:-translate-x-1/2 space-y-16 py-8">
+            
+            {/* Event 1 */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative pl-8 md:pl-0 md:w-1/2 md:-ml-[2px] md:pr-12 text-left md:text-right"
+            >
+              <div className="absolute left-[-9px] md:right-[-9px] md:left-auto top-2 w-4 h-4 rounded-full bg-cherry-600 ring-4 ring-cream-500 shadow-md"></div>
+              <div className="flex items-center gap-2 md:justify-end text-cherry-600 mb-2">
+                <Clock size={18} />
+                <span className="font-[family-name:var(--font-playfair)] font-bold text-xl">[Time]</span>
+              </div>
+              <h3 className="font-[family-name:var(--font-playfair)] text-3xl text-cherry-900 mb-2">Guest Arrival</h3>
+              <p className="font-[family-name:var(--font-cormorant)] text-lg text-cherry-700">
+                Welcome drinks and finding your seats before the sacred vows begin.
+              </p>
+            </motion.div>
+
+            {/* Event 2 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative pl-8 md:pl-12 md:w-1/2 md:ml-auto text-left"
+            >
+              <div className="absolute left-[-9px] top-2 w-4 h-4 rounded-full bg-cherry-600 ring-4 ring-cream-500 shadow-md"></div>
+              <div className="flex items-center gap-2 text-cherry-600 mb-2">
+                <Heart size={18} />
+                <span className="font-[family-name:var(--font-playfair)] font-bold text-xl">[Time]</span>
+              </div>
+              <h3 className="font-[family-name:var(--font-playfair)] text-3xl text-cherry-900 mb-2">The Ceremony</h3>
+              <p className="font-[family-name:var(--font-cormorant)] text-lg text-cherry-700 mb-3">
+                The sacrament of holy matrimony.
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cherry-50 rounded-full border border-cherry-200">
+                <MapPin size={16} className="text-cherry-500" />
+                <span className="font-[family-name:var(--font-cormorant)] text-cherry-800">[Church Placeholder]</span>
+              </div>
+            </motion.div>
+
+            {/* Event 3 */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="relative pl-8 md:pl-0 md:w-1/2 md:-ml-[2px] md:pr-12 text-left md:text-right"
+            >
+              <div className="absolute left-[-9px] md:right-[-9px] md:left-auto top-2 w-4 h-4 rounded-full bg-cherry-600 ring-4 ring-cream-500 shadow-md"></div>
+              <div className="flex items-center gap-2 md:justify-end text-cherry-600 mb-2">
+                <Music size={18} />
+                <span className="font-[family-name:var(--font-playfair)] font-bold text-xl">[Time]</span>
+              </div>
+              <h3 className="font-[family-name:var(--font-playfair)] text-3xl text-cherry-900 mb-2">Reception Dinner</h3>
+              <p className="font-[family-name:var(--font-cormorant)] text-lg text-cherry-700 mb-3">
+                Join us for an enchanting evening of dining, dancing, and celebration.
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cherry-50 rounded-full border border-cherry-200">
+                <MapPin size={16} className="text-cherry-500" />
+                <span className="font-[family-name:var(--font-cormorant)] text-cherry-800">[Location Placeholder]</span>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. The "Envelope" Blessing Section */}
+      <section id="guestbook" className="py-28 px-4 bg-cherry-100 relative">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+        
+        <div className="max-w-2xl mx-auto relative z-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <p className="font-[family-name:var(--font-dancing)] text-4xl text-cherry-700 mb-2">Send a Little Love</p>
+            <h2 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-cherry-900 font-bold">Digital Guestbook</h2>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 50, rotateX: 10 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="perspective-1000"
+          >
+            {/* The Envelope */}
+            <div className="bg-[#fcf8f2] p-8 md:p-12 shadow-2xl rounded-sm border-t-8 border-cherry-600 relative transform transition-transform border border-cherry-200/50">
+              {/* Corner Ornaments */}
+              <Heart size={12} className="absolute top-3 left-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute top-3 right-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute bottom-3 left-3 text-cherry-300 fill-cherry-300/10" />
+              <Heart size={12} className="absolute bottom-3 right-3 text-cherry-300 fill-cherry-300/10" />
+
+              {/* Postage Stamp Detail */}
+              <div className="absolute top-6 right-6 w-12 h-14 border border-cherry-200 bg-cream-100 flex items-center justify-center rotate-3 opacity-70">
+                <Heart size={20} className="text-cherry-300" />
+              </div>
+              
+              <h3 className="font-[family-name:var(--font-playfair)] text-2xl text-cherry-900 mb-6 border-b border-cherry-100 pb-4">
+                To: Ishake & Marleen
+              </h3>
+              
+              <form onSubmit={handleWhatsAppSubmit}>
+                <textarea 
+                  maxLength={1000} 
+                  required 
+                  rows={6} 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Write your wishes here..." 
+                  className="w-full bg-white/60 p-4 rounded-xl text-xl outline-none resize-none text-cherry-950 placeholder:text-cherry-500 font-[family-name:var(--font-cormorant)] leading-relaxed mb-6 border border-cherry-200 focus:border-cherry-400 focus:ring-2 focus:ring-cherry-100 transition-all shadow-inner"
+                ></textarea>
+                
+                <button 
+                  type="submit" 
+                  className="w-full py-4 bg-cherry-800 hover:bg-cherry-700 text-cream-100 font-[family-name:var(--font-playfair)] text-xl tracking-wider transition-colors flex items-center justify-center gap-3 shadow-md"
+                >
+                  <Send size={20} />
+                  Send via WhatsApp
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 6. Simple Footer */}
+      <footer className="py-16 px-4 bg-cherry-900 text-center text-cream-100">
+        <p className="font-[family-name:var(--font-playfair)] text-3xl mb-2 text-cream-100 font-bold">Ishake & Marleen</p>
+        <p className="font-[family-name:var(--font-cormorant)] text-base text-cherry-200 opacity-90">We can't wait to celebrate with you.</p>
+      </footer>
+    </main>
   );
 }

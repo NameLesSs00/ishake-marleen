@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff5f5;
+  --foreground: #4a0404;
 }
 
 @theme inline {
@@ -10,17 +10,56 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  
+  --color-cherry-900: #4a0404;
+  --color-cherry-800: #722f37;
+  --color-cherry-700: #90323d;
+  --color-cherry-600: #b04153;
+  --color-cherry-500: #d65a70;
+  --color-cherry-400: #f28296;
+  --color-cherry-300: #fca5b6;
+  --color-cherry-200: #fcd4dc;
+  --color-cherry-100: #fee2e6;
+  --color-cherry-50: #fff5f5;
+  
+  --color-cream-900: #d4c4b7;
+  --color-cream-800: #e6d8cc;
+  --color-cream-500: #fdfaf6;
+  --color-cream-100: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
 }
