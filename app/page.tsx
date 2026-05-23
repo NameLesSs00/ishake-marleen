@@ -196,11 +196,11 @@ export default function Home() {
               {/* Elegant Arched Frame */}
               <div className="absolute inset-0 rounded-t-full rounded-b-2xl overflow-hidden shadow-2xl border-[8px] border-white z-10">
                 <Image
-                  src="/profile2.jpeg"
+                  src="/profile21.jpeg"
                   alt="Ishak and Marleen together"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center"
+                  className="object-cover object-[70%_80%]"
                 />
               </div>
               {/* Decorative Frame */}
