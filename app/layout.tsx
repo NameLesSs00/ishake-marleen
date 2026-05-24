@@ -20,8 +20,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Ishake & Marleen — Wedding Invitation",
-  description: "You are cordially invited to celebrate the wedding of Ishake and Marleen",
+  title: "Ishak & Marleen — Wedding Invitation",
+  description: "You are cordially invited to celebrate the wedding of Ishak and Marleen",
 };
 
 export default function RootLayout({
