@@ -292,7 +292,7 @@ export default function Home() {
               </div>
               <h3 className="font-[family-name:var(--font-playfair)] text-3xl text-cherry-900 mb-2">Guest Arrival</h3>
               <p className="font-[family-name:var(--font-cormorant)] text-lg text-cherry-700">
-                Welcome drinks and finding your seats before the sacred vows begin.
+                Finding your seats before the sacred vows begin.
               </p>
             </motion.div>
 
